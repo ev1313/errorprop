@@ -81,13 +81,17 @@ def calc_gaussian_errorprop_multi(equation, datadict):
             assert(False, "{} data is not a 2-tuple!".format(n))
 
     results = []
-    for i in range(data_list_len):
-        temp_data = {}
-        for n, data in datadict.items():
-            if isinstance(data, list):
-                temp_data[n] = data[i]
-            else:
-                temp_data[n] = data
-        results.append(calc_gaussian_errorprop_single(equation, temp_data))
+
+    if data_list_len == 0:
+        results.append(calc_gaussian_errorprop_single(equation, datadict))
+    else:
+        for i in range(data_list_len):
+            temp_data = {}
+            for n, data in datadict.items():
+                if isinstance(data, list):
+                    temp_data[n] = data[i]
+                else:
+                    temp_data[n] = data
+                    results.append(calc_gaussian_errorprop_single(equation, temp_data))
 
     return results
