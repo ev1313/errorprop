@@ -15,14 +15,14 @@ setup(name='errorprop',
         'Topic :: Scientific/Engineering',
       ],
       long_description=readme(),
-      keywords='propagation uncertainties symbolic latex fitting error',
+      keywords='propagation uncertainties fitting error',
       url='https://github.com/ev1313/errorprop',
       author='Tim Blume',
       author_email='errorprop@3nd.io',
       license='BSD',
       packages=['errorprop'],
       install_requires=[
-          'numpy','sympy','uncertainties','scipy'
+          'numpy','sympy'
       ],
       include_package_data=True,
       zip_safe=False)

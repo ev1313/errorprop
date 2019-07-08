@@ -1,8 +1,4 @@
-uncertainties
 pytest
 pytest-cov
-hypothesis
-coverage
 sympy
-scipy
 numpy
