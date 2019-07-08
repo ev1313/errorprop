@@ -1,6 +1,8 @@
 import sympy as sy
 import numpy as np
 
+import pdb
+
 """
     This method calculates the given equation and does a gaussian error propagation for a single datapoint.
 
@@ -65,20 +67,26 @@ def calc_gaussian_errorprop_multi(equation, datadict):
     data_list_len = 0
     for n, data in datadict.items():
         if isinstance(data, list):
-            if data_list_len == 0:
+            if not len(data):
+                raise ValueError("{} contains an empty list!".format(n))
+            if not data_list_len:
                 data_list_len = len(data)
             else:
-                assert(data_list_len == len(data), "data lists have inconsistent lengths! {} has length {} but should have {}".format(n, len(data), data_list_len))
+                if not data_list_len == len(data):
+                    raise ValueError("data lists have inconsistent lengths! {} has length {} but should have {}".format(n, len(data), data_list_len))
 
             i = 0
             for d in data:
-                assert(isinstance(d, tuple), "data list {} {} contains not a tuple at position {}!".format(n, d, i))
-                assert(len(d)==2, "{} tuple in data list at position {} does not have two elements!".format(n, d, i))
+                if not isinstance(d, tuple):
+                    raise ValueError("data list {} {} contains not a tuple at position {}!".format(n, d, i))
+                if not len(d)==2:
+                    raise ValueError("{} tuple in data list at position {} does not have two elements!".format(n, d, i))
                 i+=1
         elif isinstance(data, tuple):
-            assert(len(data)==2, "{} tuple does not have two elements!".format(n))
+            if not len(data)==2:
+                raise ValueError("{} tuple does not have two elements!".format(n))
         else:
-            assert(False, "{} data is not a 2-tuple!".format(n))
+            raise ValueError("{} data is not a 2-tuple!".format(n))
 
     results = []
 

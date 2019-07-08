@@ -1,4 +1,4 @@
-pytest
-pytest-cov
 sympy
 numpy
+pytest
+pytest-cov

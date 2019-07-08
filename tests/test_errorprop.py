@@ -1,5 +1,7 @@
 import pytest
 
+import pdb
+
 from errorprop.errorprop import calc_gaussian_errorprop_single, calc_gaussian_errorprop_multi
 import sympy as sy
 
@@ -54,3 +56,32 @@ def test_errorprop_multi_no_lists():
     assert(len(E)==1)
     assert(round(E[0][0],6)==7.84e8)
     assert(round(E[0][1],6)==7.84e7)
+
+def test_errorprop_multi_assert_type():
+    with pytest.raises(Exception):
+        datadict = {
+            "m": "Abc",
+            "c": 1.0
+        }
+        E = calc_gaussian_errorprop_multi(sy.sympify("m*c**2"), datadict)
+
+def test_errorprop_multi_assert_inconsistent_lengths():
+    with pytest.raises(Exception):
+        datadict = {
+            "m": [
+                (1., 0.1),
+                (2., 0.01),
+                (3., 0.15),
+                (4., 0.0),
+            ],
+            "c": [
+                (1., 0.1),
+                (2., 0.01),
+                (3., 0.15),
+                (4., 0.0),
+                (5., 0.0),
+                (6., 0.0),
+                (7., 0.0),
+            ],
+            }
+        E = calc_gaussian_errorprop_multi(sy.sympify("m*c**2"), datadict)
