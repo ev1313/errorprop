@@ -2,8 +2,6 @@ import sympy as sy
 import numpy as np
 import uncertainties as uc
 
-import pdb
-
 """
     Parameters
     ==========
@@ -62,7 +60,6 @@ def calc_errorprop(equation, datadict):
         nominal = nominal.subs(calc[n][0], str(d[0]))
         deviation = deviation.subs(calc[n][0], str(d[0]))
         deviation = deviation.subs(calc[n][2], str(d[1]))
-        pdb.set_trace()
 
     try:
         nominal = float(nominal)
