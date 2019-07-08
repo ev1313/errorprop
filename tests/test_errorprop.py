@@ -1,7 +1,5 @@
 import pytest
 
-import pdb
-
 from errorprop.errorprop import calc_gaussian_errorprop_single, calc_gaussian_errorprop_multi
 import sympy as sy
 

@@ -1,8 +1,6 @@
 import sympy as sy
 import numpy as np
 
-import pdb
-
 """
     This method calculates the given equation and does a gaussian error propagation for a single datapoint.
 
@@ -19,9 +17,10 @@ def calc_gaussian_errorprop_single(equation, datadict):
     calc = {}
     for n, data in datadict.items():
         if isinstance(data, tuple):
-            assert(len(data)==2, "{} tuple does not have two elements!".format(n))
+            if not len(data)==2:
+                raise ValueError("{} tuple does not have two elements!".format(n))
         else:
-            assert(False, "{} data is not a 2-tuple!".format(n))
+            raise ValueError("{} data is not a 2-tuple!".format(n))
         # generate derivates
         symbol = sy.Symbol(n)
         symbol_err = sy.Symbol("sigma_{}".format(n))
